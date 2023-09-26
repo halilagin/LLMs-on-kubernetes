@@ -1,0 +1,18 @@
+apiVersion: v1
+# Kind for service
+kind: Service
+metadata:
+  # Name your service
+  name: postgresdb
+  labels:
+    app: postgresdb
+spec:
+  # Choose how to expose your service
+  type: ClusterIP
+  ports:
+    # The port number to expose the service
+    - port: 5432
+  # Pod to route service traffic  
+  selector:
+    app: postgresdb
+

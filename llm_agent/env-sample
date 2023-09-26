@@ -1,0 +1,20 @@
+OPENAI_API_KEY=
+ANYSCALE_API_KEY=
+OPENAI_API_BASE="https://api.endpoints.anyscale.com/v1"
+ANYSCALE_API_BASE="https://api.endpoints.anyscale.com/v1"
+DB_CONNECTION_STRING="postgresql://testUser:testPassword@localhost:15432/testDB"
+EMBEDDING_INDEX_DIR=/tmp/embedding_index_sql
+VECTOR_TABLE_NAME=document
+VECTOR_TABLE_DUMP_OUTPUT_PATH=/tmp/vector.document.dump.sql
+RAYDOCS_ROOT=/tmp/raydocs
+NUM_CPUS=14
+NUM_GPUS=1
+NUM_CHUNKS=5
+CHUNK_SIZE=500
+CHUNK_OVERLAP=50
+EMBEDDING_MODEL_NAME="thenlper/gte-base"
+LLM_MODEL_NAME=meta-llama/Llama-2-70b-chat-hf
+
+#How much data should be fed for fine tuning
+#give a floating number between >0.001 and 1 (1 included, which means use all the data for fine tuning)
+USE_THIS_PORTION_OF_DATA=0.05
