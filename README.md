@@ -98,7 +98,6 @@ and see the result below
 For LLM agent we will use Scaleway and OpenAPI API gateways. Therefore, we need to setup the api keys and endpoints. The following lists the content of `llm_agent/.env`, which is our configuration file. Please set the API keys accordingly save the content below in `llm_agent/.env`.
 
 ```bash
-
 OPENAI_API_KEY=
 ANYSCALE_API_KEY=
 OPENAI_API_BASE="https://api.endpoints.anyscale.com/v1"
@@ -115,6 +114,11 @@ CHUNK_SIZE=500
 CHUNK_OVERLAP=50
 EMBEDDING_MODEL_NAME="thenlper/gte-base"
 LLM_MODEL_NAME=meta-llama/Llama-2-70b-chat-hf
+
+#How much data should be fed for fine tuning
+#give a floating number between >0.001 and 1 (1 included, which means use all the data for fine tuning)
+USE_THIS_PORTION_OF_DATA=0.05
+
 ```
 
 My machine has 16 CPUs and 1 GPU, so I set up `NUM_CPUS` and `NUM_GPUs` accordingly. These numbers may differ according to your machine. The principle here is that you can not set up a number larger than existing resources (CPU and GPU).
