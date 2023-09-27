@@ -7,10 +7,14 @@ llm_package_env_path=$llm_package_root/llm_agent/.env
 llm_package_argocd_app_path=$llm_package_root/argocd/020-argocd-application.yaml
 llm_package_yamls_path=$llm_package_root/yamls
 
-function deploy(){
-kubectl create ns $llm_package
-kubectl create configmap -n $llm_package llm-0001 --from-env-file=$llm_package_env_path
+function k(){
+kubectl $@
+}
 
+function deploy(){
+k create ns $llm_package
+k create configmap -n $llm_package llm-0001 --from-env-file=$llm_package_env_path
+k create -f $llm_package_yamls_path
 }
 
 
