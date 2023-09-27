@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: db-persistent-volume-claim
+  namespace: llm-0001
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
@@ -18,6 +19,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresdb
+  namespace: llm-0001
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation

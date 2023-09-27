@@ -4,6 +4,7 @@ kind: ConfigMap
 metadata:
   # Name your ConfigMap
   name: db-secret-credentials
+  namespace: llm-0001
   labels:
     app: postgresdb
   annotations:

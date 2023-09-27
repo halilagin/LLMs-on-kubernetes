@@ -4,6 +4,7 @@ kind: Service
 metadata:
   # Name your service
   name: postgresdb
+  namespace: llm-0001
   labels:
     app: postgresdb
   annotations:

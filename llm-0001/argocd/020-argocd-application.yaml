@@ -1,16 +1,8 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  creationTimestamp: null
-  name: llm-0001
-spec: {}
-status: {}
----
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: llm-0001
-  namespace: llm-0001
+  namespace: argocd
 spec:
   generators:
   - list:
