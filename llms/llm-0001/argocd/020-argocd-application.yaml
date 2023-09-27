@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/halilagin/LLMs-on-kubernetes.git
     targetRevision: main
-    path: llm-0001/llm/yamls
+    path: llms/llm-0001/yamls
   syncPolicy:
     automated: {}
     syncOptions:

@@ -314,6 +314,6 @@ agent = QueryAgent(
                     max_context_length=MAX_CONTEXT_LENGTHS[LLM],
                         system_content=system_content)
 result = agent(query=query, stream=False)
-print("\n\n", json.dumps(result, indent=2))
+print("\n\n", json.dumps(result.__dict__, indent=2))
 
 
