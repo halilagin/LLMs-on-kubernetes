@@ -28,5 +28,5 @@ kubectl create -f $llm_package_argocd_app_path
 }
 
 
-local_deploy
-#argocd_deploy
+#local_deploy
+argocd_deploy
