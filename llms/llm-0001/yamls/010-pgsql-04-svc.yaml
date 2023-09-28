@@ -7,10 +7,10 @@ metadata:
   namespace: llm-0001
   labels:
     app: postgresdb
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-wave: "3"
+      #  annotations:
+      #argocd.argoproj.io/hook: Sync
+      #argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+      #argocd.argoproj.io/sync-wave: "3"
 spec:
   # Choose how to expose your service
   type: ClusterIP

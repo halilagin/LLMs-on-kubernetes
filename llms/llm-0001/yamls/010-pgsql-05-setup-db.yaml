@@ -3,10 +3,10 @@ kind: Pod
 metadata:
   name: postgres-setup
   namespace: llm-0001
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-wave: "4"
+    #  annotations:
+    #argocd.argoproj.io/hook: Sync
+    #argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    # argocd.argoproj.io/sync-wave: "4"
 spec:
   containers:
     - name: postgresdb

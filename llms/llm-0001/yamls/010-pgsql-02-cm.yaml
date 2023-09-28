@@ -7,10 +7,10 @@ metadata:
   namespace: llm-0001
   labels:
     app: postgresdb
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-wave: "1"
+      #  annotations:
+      #argocd.argoproj.io/hook: Sync
+      #argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+      #argocd.argoproj.io/sync-wave: "1"
 data:
   # User DB
   POSTGRES_DB: testDB
