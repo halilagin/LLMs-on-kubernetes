@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres-setup
+  namespace: llm-0001
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  containers:
+    - name: postgresdb
+      #image: postgres
+      image: ankane/pgvector
+      envFrom:
+        - configMapRef:
+            name: llm-0001
+      command: 
+      - sh
+      - -c
+      - |
+        cat <<'EOF' > /tmp/create-embedding-vector-table.sql
+        CREATE EXTENSION IF NOT EXISTS vector;
+        CREATE TABLE IF NOT EXISTS document (
+        id serial primary key,
+        "text" text not null,
+        source text not null,
+        embedding vector(768)
+        );
+        EOF
+        psql $DB_CONNECTION_STRING -f /tmp/create-embedding-vector-table.sql

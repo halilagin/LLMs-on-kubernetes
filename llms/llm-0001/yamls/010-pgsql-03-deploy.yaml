@@ -43,6 +43,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: db-secret-credentials
+            - configMapRef:
+                name: llm-0001
           volumeMounts:
             - mountPath: /var/lib/postgres/data
               name: db-data
