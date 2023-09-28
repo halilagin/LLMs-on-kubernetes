@@ -3,10 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: db-persistent-volume-claim
   namespace: llm-0001
-    #annotations:
-    #argocd.argoproj.io/hook: Sync
-    #argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    #argocd.argoproj.io/sync-wave: "2"
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   storageClassName: microk8s-hostpath
   accessModes:
@@ -20,6 +18,8 @@ kind: Deployment
 metadata:
   name: postgresdb
   namespace: llm-0001
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   replicas: 1
   selector:
