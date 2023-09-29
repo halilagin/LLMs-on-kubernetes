@@ -30,8 +30,6 @@ spec:
       envFrom:
         - configMapRef:
             name: llm-0001
-        - configMapRef:
-            name: llm-0001
       volumeMounts:
         - mountPath: /opt/llm-fine-tune-storage
           name: v-llm-fine-tune
