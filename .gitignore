@@ -1,7 +1,10 @@
 .env
+.env.local
+.env.kube
 _log
 *.swo
 *.swp
+__pycache__
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
