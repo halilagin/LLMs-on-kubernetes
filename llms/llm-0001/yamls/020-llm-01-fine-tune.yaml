@@ -44,7 +44,7 @@ spec:
         - |
           chmod -R 777 $WORK_DIR
           #download scraped content
-          rm -rf $EFS_DIR && mkdir -p $RAYDOCS_ROOT
+          rm -rf $RAYDOCS_ROOT && mkdir -p $RAYDOCS_ROOT
           wget --quiet https://github.com/meddash-cloud/meddash-public-datasets/raw/main/archives/docs.ray.io.tar.gz -P $RAYDOCS_ROOT
           cd $RAYDOCS_ROOT && tar xzf docs.ray.io.tar.gz && rm docs.ray.io.tar.gz
 
