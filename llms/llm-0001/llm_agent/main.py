@@ -51,7 +51,6 @@ from rag.config import EMBEDDING_DIMENSIONS, MAX_CONTEXT_LENGTHS
 from pathlib import Path
 from rag.config import EFS_DIR
 
-EFS_DIR="/tmp/raydocs"
 
 import os
 import ray
