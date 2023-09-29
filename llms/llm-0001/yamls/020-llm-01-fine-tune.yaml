@@ -46,7 +46,7 @@ spec:
           #download scraped content
           rm -rf $EFS_DIR && mkdir -p $RAYDOCS_ROOT
           wget --quiet https://github.com/meddash-cloud/meddash-public-datasets/raw/main/archives/docs.ray.io.tar.gz -P $RAYDOCS_ROOT
-          cd $EFS_DIR && tar xzf docs.ray.io.tar.gz && rm docs.ray.io.tar.gz
+          cd $RAYDOCS_ROOT && tar xzf docs.ray.io.tar.gz && rm docs.ray.io.tar.gz
 
           #run fine tuning
           cd /opt/llm-fine-tune-storage 

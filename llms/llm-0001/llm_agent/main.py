@@ -49,7 +49,6 @@ from  query_agent import QueryAgent
 from rag.config import EMBEDDING_DIMENSIONS, MAX_CONTEXT_LENGTHS
 
 from pathlib import Path
-from rag.config import EFS_DIR
 
 
 import os
