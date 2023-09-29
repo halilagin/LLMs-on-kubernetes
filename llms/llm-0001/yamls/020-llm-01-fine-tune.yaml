@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-llm-fine-tune
+  namespace: llm-0001
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: llm-0001-fine-tune
+  namespace: llm-0001
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+spec:
+  containers:
+    - name: llm-0001-fine-tune
+      #image: postgres
+      image: halilagin/python-with-utils:0.0.1
+      ports:
+        - containerPort: 5432
+      envFrom:
+        - configMapRef:
+            name: llm-0001
+        - configMapRef:
+            name: llm-0001
+      volumeMounts:
+        - mountPath: /opt/llm-fine-tune-storage
+          name: v-llm-fine-tune
+      command:
+        - bash
+        - -c
+        - |
+          chmod -R 777 /opt/llm-fine-tune-storage && \
+          cd /opt/llm-fine-tune-storage && \
+          git clone $REMOTE_GIT_REPO && \
+          cd LLMs-on-kubernetes/llms/llm-0001/llm_agent && \
+          bash start-ray-cluster.sh
+          while true; do sleep 10; done
+  volumes:
+    - name: v-llm-fine-tune
+      persistentVolumeClaim:
+        claimName: pvc-llm-fine-tune
