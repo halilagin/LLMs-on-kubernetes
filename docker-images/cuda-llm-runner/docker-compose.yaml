@@ -1,0 +1,23 @@
+version:  '3.5'
+
+services:
+  datascience-notebook:
+    environment:
+      - DOCKER_DEFAULT_PLATFORM=linux/aarch64
+    build:
+      context: .
+      shm_size: '10gb'
+    shm_size: '6gb'
+    image:   halilagin/jupyter-rag-langchain:0.0.1 
+    volumes:
+      - ${LOCAL_WORKING_DIR}:/home/jovyan/work
+      - ${LOCAL_DATASETS}:/home/jovyan/work/datasets
+      - ${LOCAL_MODULES}:/home/jovyan/work/modules
+        #- ${LOCAL_SSL_CERTS}:/etc/ssl/notebook
+    ports:
+      - 8888:8888
+      - 8080:8080
+      - 8265:8265
+    container_name:   jupyter_notebook
+      #command: "start-notebook.sh         --NotebookApp.password=meddash         --NotebookApp.certfile=/etc/ssl/notebook/jupyter.pem"
+

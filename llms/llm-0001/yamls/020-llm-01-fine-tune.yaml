@@ -24,7 +24,7 @@ spec:
   containers:
     - name: llm-0001-fine-tune
       #image: postgres
-      image: halilagin/llm-runner:0.0.1
+      image: halilagin/cuda-llm-runner:0.0.1
       ports:
         - containerPort: 5432
       envFrom:
