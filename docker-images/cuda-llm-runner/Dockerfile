@@ -25,9 +25,9 @@ COPY Pipfile /home/appuser
 RUN pipenv lock
 RUN pipenv requirements --dev > dev-requirments.txt
 RUN pipenv requirements > requirments.txt
-RUN pip3 install --upgrade pip && \
-pip3 install -r dev-requirments.txt && \
-pip3 install -r requirments.txt
+RUN pip install --upgrade pip && \
+pip install -r dev-requirments.txt && \
+pip install -r requirments.txt
 
 #RUN pipenv --python /opt/conda/bin/python3 && \
 #pipenv lock && pipenv --clear && pipenv --rm && \
