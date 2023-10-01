@@ -17,8 +17,18 @@ RUN add-apt-repository "deb https://apt.postgresql.org/pub/repos/apt $(lsb_relea
 RUN apt-get update && \
 apt-get install -y libpq-dev  postgresql-client 
 RUN pip install --quiet python-dotenv pipenv
-WORKDIR /
-COPY Pipfile /
+
+RUN useradd --create-home appuser
+USER appuser
+WORKDIR /home/appuser
+COPY Pipfile /home/appuser
+RUN pipenv lock
+RUN pipenv requirements --dev > dev-requirments.txt
+RUN pipenv requirements > requirments.txt
+RUN pip3 install --upgrade pip && \
+pip3 install -r dev-requirments.txt && \
+pip3 install -r requirments.txt
+
 #RUN pipenv --python /opt/conda/bin/python3 && \
 #pipenv lock && pipenv --clear && pipenv --rm && \
 #pipenv install --system --deploy
