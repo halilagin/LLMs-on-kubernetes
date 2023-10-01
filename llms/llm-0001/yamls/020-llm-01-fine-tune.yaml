@@ -24,7 +24,8 @@ spec:
   containers:
     - name: llm-0001-fine-tune
       #image: postgres
-      image: localhost:32000/halilagin/cuda-llm-runner:0.0.1
+      #image: localhost:32000/halilagin/cuda-llm-runner:0.0.1
+      image: halilagin/cuda-llm-runner:0.0.1
       ports:
         - containerPort: 5432
       envFrom:
@@ -35,6 +36,8 @@ spec:
           value: /home/appuser/llm-fine-tune-storage
         - name: RAYDOCS_ROOT
           value: /home/appuser/llm-fine-tune-storage/raydocs
+        - name: RAY
+          value: /home/appuser/.local/bin/ray
       volumeMounts:
         - mountPath: /home/appuser/llm-fine-tune-storage
           name: v-llm-fine-tune
@@ -42,7 +45,6 @@ spec:
         - bash
         - -c
         - |
-          while true; do sleep 10; done;
           chmod -R 777 $WORK_DIR
           #download scraped content
           rm -rf $RAYDOCS_ROOT && mkdir -p $RAYDOCS_ROOT
@@ -53,10 +55,11 @@ spec:
           cd $WORK_DIR
           git clone $REMOTE_GIT_REPO 
           cd LLMs-on-kubernetes 
-          ray start --head --num-cpus=$NUM_CPUS --num-gpus=$NUM_GPUS 
+          $RAY disable-usage-stats
+          $RAY start --head --num-cpus=$NUM_CPUS --num-gpus=$NUM_GPUS 
           cd llms/llm-0001/llm_agent
           python3 main.py >/tmp/finetune.log 2>&1
-          while true; do sleep 10; done;
+          $RAY stop
   volumes:
     - name: v-llm-fine-tune
       persistentVolumeClaim:

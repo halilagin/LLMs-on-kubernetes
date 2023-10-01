@@ -1,0 +1,2 @@
+set -x
+socat TCP-LISTEN:20091,fork TCP:127.0.0.1:20090

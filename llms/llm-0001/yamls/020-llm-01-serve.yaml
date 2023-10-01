@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-llm-serve
+  namespace: llm-0001
+  annotations:
+    argocd.argoproj.io/sync-wave: "7"
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-0001-serve
+  namespace: llm-0001
+  annotations:
+    argocd.argoproj.io/sync-wave: "7"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-0001-serve
+  template:
+    metadata:
+      labels:
+        app: llm-0001-serve
+    spec:
+      volumes:
+        - name: v-llm-serve
+          persistentVolumeClaim:
+            claimName: pvc-llm-serve
+      containers:
+        - name: llm-0001-serve
+          image: halilagin/cuda-llm-runner:0.0.1
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: db-secret-credentials
+            - configMapRef:
+                name: llm-0001
+          env:
+            - name: RAY_SERVE
+              value: /home/appuser/.local/bin/serve
+            - name: WORK_DIR
+              value: /home/appuser/llm-serve-storage
+          volumeMounts:
+            - mountPath: /home/appuser/llm-serve-storage
+              name: v-llm-serve
+          command:
+          - bash
+          - -c
+          - |
+            #run fine tuning
+            cd $WORK_DIR
+            git clone $REMOTE_GIT_REPO
+            cd LLMs-on-kubernetes/llms/llm-0001/llm_agent
+            $RAY_SERVE run serve_llm_agent:deployment
