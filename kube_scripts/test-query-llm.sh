@@ -6,8 +6,7 @@ URL='http://127.0.0.1:20091/query?query="What is the default batch size for map_
 query="What is the default batch size for map_batches?"
 
 # Make a POST request to the query endpoint
-curl -X POST \
--H "Content-Type: application/json" \
-$URL
+curl -X POST $URL \
+-H "Content-Type: application/json" 
 
 
